@@ -46,8 +46,8 @@ function UserDataForCreateNewUser() {
       <div className="h-4/6 flex pt-5 pl-10 pr-10 overflow-hidden">
         <div className="mt-5 w-1/4 h-16 flex flex-col items-center">
           <img
-            src="https://cdn.pixabay.com/photo/2012/04/14/17/20/bird-34663_640.png"
-            className="w-72 h-72 object-cover rounded-full border-gray-300 border-2"
+            src="https://cdn.pixabay.com/photo/2014/06/22/17/21/colored-pencils-374771_640.jpg"
+            className="w-80 h-80 object-cover rounded-full border-gray-300 border-2"
           />
           <div id="user-image" className="mt-6 flex flex-col items-center">
             <label

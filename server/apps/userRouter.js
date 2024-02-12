@@ -1,23 +1,9 @@
 import { Router } from "express";
+import users from "../userData/users.js";
 
 const userRouter = Router();
 
-let user = [
-  {
-    id: 1,
-    firstname: "Somsak",
-    lastname: "Deemak",
-    gender: "Male",
-    birthdate: "13/06/2000",
-  },
-  {
-    id: 2,
-    firstname: "Manee",
-    lastname: "DeeDee",
-    gender: "Female",
-    birthdate: "21/01/2001",
-  },
-];
+let user = users;
 
 // ดูข้อมูล User ทั้งหมด
 
@@ -40,8 +26,10 @@ userRouter.get("/:nameSurname", function (req, res) {
 
   let userData = user.filter((item) => {
     return (
-      item.firstname.includes(nameSurnameFromClient) ||
-      item.lastname.includes(nameSurnameFromClient)
+      item.firstname
+        .toLowerCase()
+        .includes(nameSurnameFromClient.toLowerCase()) ||
+      item.lastname.toLowerCase().includes(nameSurnameFromClient.toLowerCase())
     );
   });
 

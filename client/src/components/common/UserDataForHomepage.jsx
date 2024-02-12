@@ -3,33 +3,48 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function UserData() {
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState([]);
+  const [searchData, setSearchData] = useState([]);
+  const [search, setSearch] = useState("");
+
   const navigate = useNavigate();
 
   async function getUserData() {
-    const response = await axios.get("http://localhost:4000/users");
-    setUserData(response.data.data);
+    if (search === "") {
+      const response = await axios.get("http://localhost:4000/users");
+      setUserData(response.data.data);
+    }
   }
 
   useEffect(() => {
     getUserData();
   }, []);
 
+  async function searchUserData(event) {
+    event.preventDefault();
+
+    if (search !== "") {
+      const response = await axios.get(`http://localhost:4000/users/${search}`);
+      setSearchData(response.data.data);
+      setSearch("");
+    }
+  }
+
+  console.log(searchData);
+  console.log(search);
+
   async function deleteUserData(userID) {
     await axios.delete(`http://localhost:4000/users/${userID}`);
     getUserData();
   }
 
-  function handleSubmit() {
+  function handleClick() {
     navigate("/CreateNewUser");
   }
 
   return (
     <>
-      <form
-        className="h-1/12 flex justify-between items-center mt-7"
-        onSubmit={handleSubmit}
-      >
+      <form className="h-1/12 flex justify-between items-center mt-7">
         <label htmlFor="search" className="text-slate-500 ml-11 text-2xl">
           User Lists
         </label>
@@ -38,9 +53,17 @@ function UserData() {
             id="search"
             type="text"
             className="w-3/4 h-14 p-5 border-2 border-slate-400 rounded-xl text-xl"
+            onChange={(event) => {
+              setSearch(event.target.value);
+            }}
+            value={search}
             placeholder="Search"
           />
-          <button>
+          <button
+            onClick={(event) => {
+              searchUserData(event);
+            }}
+          >
             <img
               className="w-7 h-7 ml-4"
               src="https://cdn.pixabay.com/photo/2021/10/11/00/59/search-6699087_1280.png"
@@ -50,6 +73,7 @@ function UserData() {
         <button
           type="submit"
           className="bg-blue-500 w-28 h-11 mr-8 p-1 text-white rounded-lg"
+          onClick={handleClick}
         >
           Add +
         </button>
@@ -65,61 +89,115 @@ function UserData() {
           <p className="text-lg font-medium relative right-5">Action</p>
         </div>
 
-        {userData &&
-          userData.map((item) => {
-            return (
-              <div className="mt-5 w-11/12" key={item.id}>
-                <ul className="flex w-full items-center justify-around">
-                  <li>
-                    <img
-                      src="https://cdn.pixabay.com/photo/2012/04/14/17/20/bird-34663_640.png"
-                      className="w-16 h-16 rounded-full object-cover relative left-14 "
-                    />
-                  </li>
-                  <li>
-                    <p className="text-lg  w-36 relative left-28 ">
-                      {item.firstname}
-                    </p>
-                  </li>
-                  <li>
-                    <p className="text-lg  w-40 relative left-24">
-                      {item.lastname}
-                    </p>
-                  </li>
-                  <li>
-                    <p className="text-lg  w-16 relative left-16 ">
-                      {item.gender}
-                    </p>
-                  </li>
-                  <li>
-                    <p className="text-lg  w-24 relative left-24 ">
-                      {item.birthdate}
-                    </p>
-                  </li>
-                  <li>
-                    <div className="text-lg  w-48 flex justify-evenly relative left-10">
-                      <button
-                        className="bg-yellow-400 w-2/5 pl-2 pr-3 h-10 text-white"
-                        onClick={() => {
-                          navigate(`/EditUserData/${item.id}`);
-                        }}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="bg-red-500 w-2/5 pl-2 pr-3 h-10 text-white"
-                        onClick={() => {
-                          deleteUserData(item.id);
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            );
-          })}
+        {searchData[0] === undefined
+          ? userData.map((item) => {
+              return (
+                <div className="mt-5 w-11/12" key={item.id}>
+                  <ul className="flex w-full items-center justify-around">
+                    <li>
+                      <img
+                        src={item.image}
+                        className="w-16 h-16 rounded-full object-cover relative left-14 "
+                      />
+                    </li>
+                    <li>
+                      <p className="text-lg  w-36 relative left-28 ">
+                        {item.firstname}
+                      </p>
+                    </li>
+                    <li>
+                      <p className="text-lg  w-40 relative left-24">
+                        {item.lastname}
+                      </p>
+                    </li>
+                    <li>
+                      <p className="text-lg  w-16 relative left-16 ">
+                        {item.gender}
+                      </p>
+                    </li>
+                    <li>
+                      <p className="text-lg  w-24 relative left-24 ">
+                        {item.birthdate}
+                      </p>
+                    </li>
+                    <li>
+                      <div className="text-lg  w-48 flex justify-evenly relative left-10">
+                        <button
+                          className="bg-yellow-400 w-2/5 pl-2 pr-3 h-10 text-white"
+                          onClick={() => {
+                            navigate(`/EditUserData/${item.id}`);
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="bg-red-500 w-2/5 pl-2 pr-3 h-10 text-white"
+                          onClick={() => {
+                            deleteUserData(item.id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              );
+            })
+          : searchData.map((item) => {
+              return (
+                <div className="mt-5 w-11/12" key={item.id}>
+                  <ul className="flex w-full items-center justify-around">
+                    <li>
+                      <img
+                        src={item.image}
+                        className="w-16 h-16 rounded-full object-cover relative left-14 "
+                      />
+                    </li>
+                    <li>
+                      <p className="text-lg  w-36 relative left-28 ">
+                        {item.firstname}
+                      </p>
+                    </li>
+                    <li>
+                      <p className="text-lg  w-40 relative left-24">
+                        {item.lastname}
+                      </p>
+                    </li>
+                    <li>
+                      <p className="text-lg  w-16 relative left-16 ">
+                        {item.gender}
+                      </p>
+                    </li>
+                    <li>
+                      <p className="text-lg  w-24 relative left-24 ">
+                        {item.birthdate}
+                      </p>
+                    </li>
+                    <li>
+                      <div className="text-lg  w-48 flex justify-evenly relative left-10">
+                        <button
+                          className="bg-yellow-400 w-2/5 pl-2 pr-3 h-10 text-white"
+                          onClick={() => {
+                            navigate(`/EditUserData/${item.id}`);
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="bg-red-500 w-2/5 pl-2 pr-3 h-10 text-white"
+                          onClick={() => {
+                            deleteUserData(item.id);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              );
+            })}
       </div>
     </>
   );
