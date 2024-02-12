@@ -6,4 +6,4 @@ This project is currently under development. Other parts of the website are stil
   <li>Other features: 🚧 (Under Development)</li>
 </ul>
 <h2></h2>
-<p><a href="https://react-e-commerce-app-website.netlify.app/" target="_blank">Click to explore a preview of this project.</a></p>
+<p><a href="https://dashboard.render.com/static/srv-cn57f5un7f5s73fj1bn0/settings">Click to explore a preview of this project.</a></p>
