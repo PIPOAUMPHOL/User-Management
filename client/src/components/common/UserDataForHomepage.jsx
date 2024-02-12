@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function UserData() {
   const [userData, setUserData] = useState();
+  const navigate = useNavigate();
 
   async function getUserData() {
     const response = await axios.get("http://localhost:4000/users");
@@ -62,7 +64,12 @@ function UserData() {
                 </li>
                 <li>
                   <div className="text-lg  w-48 flex justify-evenly relative left-10">
-                    <button className="bg-yellow-400 w-2/5 pl-2 pr-3 h-10 text-white">
+                    <button
+                      className="bg-yellow-400 w-2/5 pl-2 pr-3 h-10 text-white"
+                      onClick={() => {
+                        navigate(`/EditUserData/${item.id}`);
+                      }}
+                    >
                       Edit
                     </button>
                     <button

@@ -59,6 +59,17 @@ userRouter.get("/:nameSurname", function (req, res) {
 // สร้างข้อมูล User
 
 userRouter.post("/", function (req, res) {
+  if (
+    req.body.firstname === "" &&
+    req.body.lastname === "" &&
+    req.body.gender === "" &&
+    req.body.birthdate === ""
+  ) {
+    return res.status(400).json({
+      message: "Please fill your information",
+    });
+  }
+
   user.push({
     id: user[user.length - 1].id + 1,
     ...req.body,

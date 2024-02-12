@@ -18,13 +18,20 @@ function UserDataForCreateNewUser() {
   };
 
   async function createUserData() {
-    const response = await axios.post("http://localhost:4000/users", userData);
-    alert("User has been created successfully");
-    setFirstname("");
-    setLastname("");
-    setGender("");
-    setBirthDate("");
-    navigate("/");
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/users",
+        userData
+      );
+      alert("User has been created successfully");
+      setFirstname("");
+      setLastname("");
+      setGender("");
+      setBirthDate("");
+      navigate("/");
+    } catch (error) {
+      alert("Please fill your information");
+    }
   }
 
   function cancelCreateUserData() {
