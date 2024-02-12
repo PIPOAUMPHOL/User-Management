@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from "./components/pages/Homepage";
 import CreateNewUserPage from "./components/pages/CreateNewUserPage";
 import EditUserData from "./components/pages/EditUserData";
-import Test from "./Test";
 
 function App() {
   return (
