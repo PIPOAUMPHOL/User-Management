@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +7,7 @@ function UserDataForCreateNewUser() {
   const [lastname, setLastname] = useState("");
   const [gender, setGender] = useState("");
   const [birthdate, setBirthDate] = useState("");
+  const [image, setImage] = useState("");
 
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ function UserDataForCreateNewUser() {
       setLastname("");
       setGender("");
       setBirthDate("");
+
       navigate("/");
     } catch (error) {
       alert("Please fill your information");
@@ -39,6 +41,12 @@ function UserDataForCreateNewUser() {
     setLastname("");
     setGender("");
     setBirthDate("");
+    setImage("");
+  }
+
+  function deleteImage(event) {
+    event.preventDefault();
+    setImage("");
   }
 
   return (
@@ -61,7 +69,12 @@ function UserDataForCreateNewUser() {
               <input id="upload" type="file" hidden />
             </label>
 
-            <button className="hover:cursor-pointer bg-red-600 text-white p-3 rounded-lg mt-4 ">
+            <button
+              className="hover:cursor-pointer bg-red-600 text-white p-3 rounded-lg mt-4 "
+              onClick={(event) => {
+                deleteImage(event);
+              }}
+            >
               Delete Picture
             </button>
           </div>
@@ -109,7 +122,7 @@ function UserDataForCreateNewUser() {
               </label>
               <br />
               <input
-                id="firstname"
+                id="lastname"
                 type="text"
                 className="text-xl w-4/5 h-16 border-gray-300 border-2 rounded-xl mt-2 p-5 mb-10"
                 placeholder="Please enter Last name"
@@ -124,7 +137,7 @@ function UserDataForCreateNewUser() {
               </label>
               <br />
               <input
-                id="firstname"
+                id="birthday"
                 type="date"
                 className="text-xl w-4/5 h-16 border-gray-300 border-2 rounded-xl mt-2 p-5 mb-10 text-gray-400"
                 onChange={(event) => {
