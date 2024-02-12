@@ -1,4 +1,4 @@
--- สร้างตารางตามโจทย์ใน PostgreSQL --
+-- สร้าง Table ตามโจทย์ --
 
 CREATE TABLE STORE (
 	Store_key INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
