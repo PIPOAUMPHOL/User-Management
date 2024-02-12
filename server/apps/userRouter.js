@@ -40,8 +40,8 @@ userRouter.get("/:nameSurname", function (req, res) {
 
   let userData = user.filter((item) => {
     return (
-      item.firstname === nameSurnameFromClient ||
-      item.lastname === nameSurnameFromClient
+      item.firstname.includes(nameSurnameFromClient) ||
+      item.lastname.includes(nameSurnameFromClient)
     );
   });
 
@@ -52,7 +52,7 @@ userRouter.get("/:nameSurname", function (req, res) {
   }
 
   return res.json({
-    data: userData[0],
+    data: userData,
   });
 });
 
