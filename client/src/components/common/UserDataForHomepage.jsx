@@ -36,6 +36,7 @@ function UserData() {
   async function deleteUserData(userID) {
     await axios.delete(`http://localhost:4000/users/${userID}`);
     getUserData();
+    alert("User has been deleted successfully");
   }
 
   function handleClick() {
