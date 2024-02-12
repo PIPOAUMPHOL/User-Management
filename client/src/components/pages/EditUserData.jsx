@@ -54,11 +54,14 @@ function EditUserData() {
           </label>
         </div>
         <div className="h-4/6 flex pt-5 pl-10 pr-10 overflow-hidden">
-          <div className="mt-5 w-1/4 h-16 flex flex-col items-center">
-            <img
-              src="https://cdn.pixabay.com/photo/2012/04/14/17/20/bird-34663_640.png"
-              className="w-72 h-72 object-cover rounded-full border-gray-300 border-2"
-            />
+          <div className="mt-5 w-1/4 h-full flex flex-col items-center ">
+            <div className="w-72 h-72">
+              <img
+                src="s"
+                className="w-full h-full object-cover rounded-full border-gray-300 border-2"
+              />
+            </div>
+
             <div id="user-image" className="mt-6 flex flex-col items-center">
               <label
                 htmlFor="upload"
@@ -143,7 +146,7 @@ function EditUserData() {
             </div>
           </div>
         </div>
-        <div className="h-24 flex justify-end items-center pr-40">
+        <div className="h-24 flex justify-end items-center pr-36">
           <button
             className="bg-neutral-500 w-36 h-10 rounded-lg text-xl text-white"
             onClick={cancelCreateUserData}
