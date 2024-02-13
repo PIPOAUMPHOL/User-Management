@@ -3,7 +3,7 @@ This project is currently under development. Other parts of the website are stil
 
 <h1>Features</h1>
 <ul>
-  <li>Create new user</li>
+  <li>Create new user (At this time still cannot add photos)</li>
   <li>Edit user</li>
   <li>Delete user</li>
   <li>Search user by name or surname</li>
