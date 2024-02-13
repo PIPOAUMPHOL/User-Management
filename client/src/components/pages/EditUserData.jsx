@@ -9,8 +9,7 @@ function EditUserData() {
   const [lastname, setLastname] = useState("");
   const [gender, setGender] = useState("");
   const [birthdate, setBirthDate] = useState("");
-
-  const [imageURL, setImageURL] = useState([]);
+  const [imageURL, setImageURL] = useState(null);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -19,11 +18,14 @@ function EditUserData() {
     const files = event.target.files;
 
     if (files.length > 0) {
-      const newImageURL = Array.from(files).map((file) =>
-        URL.createObjectURL(file)
-      );
+      const newImageURL = URL.createObjectURL(files[0]);
       setImageURL(newImageURL);
     }
+  }
+
+  function formatDateForServer(dateString) {
+    const [year, month, day] = dateString.split("-");
+    return `${day}/${month}/${year}`;
   }
 
   async function updateUserData() {
@@ -34,13 +36,15 @@ function EditUserData() {
       birthdate !== "" &&
       imageURL.length > 0
     ) {
+      const formattedBirthdate = formatDateForServer(birthdate);
+
       const response = await axios.put(
         `https://user-management-server-30d4.onrender.com/users/${id}`,
         {
           firstname,
           lastname,
           gender,
-          birthdate,
+          birthdate: formattedBirthdate,
           image: imageURL,
         }
       );
@@ -66,14 +70,6 @@ function EditUserData() {
 
   function deleteImage() {
     setImageURL([]);
-  }
-
-  function getToday() {
-    const today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const yyyy = today.getFullYear();
-    return `${dd}/${mm}/${yyyy}`;
   }
 
   return (
@@ -182,7 +178,7 @@ function EditUserData() {
                     setBirthDate(event.target.value);
                   }}
                   value={birthdate}
-                  max={getToday()}
+                  max={new Date().toISOString().split("T")[0]}
                 />
               </div>
             </div>
