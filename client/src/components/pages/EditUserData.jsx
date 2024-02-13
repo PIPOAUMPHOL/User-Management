@@ -52,7 +52,7 @@ function EditUserData() {
           image: imageURL,
         }
       );
-      alert("User has been created successfully");
+      alert("User has been updated successfully");
       setFirstname("");
       setLastname("");
       setGender("");
