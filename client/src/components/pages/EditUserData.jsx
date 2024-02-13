@@ -34,7 +34,7 @@ function EditUserData() {
     }
   }
 
-  async function createUserData() {
+  async function updateUserData() {
     if (
       firstname !== "" &&
       lastname !== "" &&
@@ -42,16 +42,13 @@ function EditUserData() {
       birthdate !== "" &&
       imageURL.length > 0
     ) {
-      const response = await axios.put(
-        `https://user-management-server-30d4.onrender.com/users/${id}`,
-        {
-          firstname,
-          lastname,
-          gender,
-          birthdate,
-          image: imageURL,
-        }
-      );
+      const response = await axios.put(`http://localhost:4000/users/${id}`, {
+        firstname,
+        lastname,
+        gender,
+        birthdate,
+        image: imageURL,
+      });
       alert("User has been updated successfully");
       setFirstname("");
       setLastname("");
@@ -197,7 +194,7 @@ function EditUserData() {
           <button
             className="bg-green-600 w-36 h-10 rounded-lg text-xl text-white ml-5"
             onClick={() => {
-              createUserData();
+              updateUserData();
             }}
           >
             Save

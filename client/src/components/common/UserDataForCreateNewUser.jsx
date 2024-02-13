@@ -38,16 +38,13 @@ function UserDataForCreateNewUser() {
       birthdate !== "" &&
       imageURL.length > 0
     ) {
-      const response = await axios.post(
-        "https://user-management-server-30d4.onrender.com/users",
-        {
-          firstname,
-          lastname,
-          gender,
-          birthdate,
-          image: imageURL,
-        }
-      );
+      const response = await axios.post("http://localhost:4000/users", {
+        firstname,
+        lastname,
+        gender,
+        birthdate,
+        image: imageURL,
+      });
       alert("User has been created successfully");
       setFirstname("");
       setLastname("");
