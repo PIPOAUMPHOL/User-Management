@@ -24,7 +24,9 @@ function UserData() {
     event.preventDefault();
 
     if (search !== "") {
-      const response = await axios.get(`http://localhost:4000/users/${search}`);
+      const response = await axios.get(
+        `https://user-management-server-30d4.onrender.com/users/${search}`
+      );
       setSearchData(response.data.data);
       setSearch("");
     }
@@ -34,7 +36,9 @@ function UserData() {
   console.log(search);
 
   async function deleteUserData(userID) {
-    await axios.delete(`http://localhost:4000/users/${userID}`);
+    await axios.delete(
+      `https://user-management-server-30d4.onrender.com/users/${userID}`
+    );
     getUserData();
     alert("User has been deleted successfully");
   }

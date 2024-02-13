@@ -10,6 +10,8 @@ function EditUserData() {
   const [gender, setGender] = useState("");
   const [birthdate, setBirthDate] = useState("");
 
+  const [imageURL, setImageURL] = useState([]);
+
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -18,12 +20,24 @@ function EditUserData() {
     lastname: lastname,
     gender: gender,
     birthdate: birthdate,
+    image: imageURL,
   };
+
+  function handleFileChange(event) {
+    const files = event.target.files;
+
+    if (files.length > 0) {
+      const newImageURL = Array.from(files).map((file) =>
+        URL.createObjectURL(file)
+      );
+      setImageURL(newImageURL);
+    }
+  }
 
   async function createUserData() {
     try {
       const response = await axios.put(
-        `http://localhost:4000/users/${id}`,
+        `https://user-management-server-30d4.onrender.com/users/${id}`,
         userData
       );
       alert("User has been updated successfully");
@@ -31,6 +45,7 @@ function EditUserData() {
       setLastname("");
       setGender("");
       setBirthDate("");
+      setImageURL([]);
       navigate("/");
     } catch (error) {
       alert("Please fill your information");
@@ -42,6 +57,11 @@ function EditUserData() {
     setLastname("");
     setGender("");
     setBirthDate("");
+    setImageURL([]);
+  }
+
+  function deleteImage() {
+    setImageURL([]);
   }
 
   return (
@@ -57,7 +77,7 @@ function EditUserData() {
           <div className="mt-5 w-1/4 h-full flex flex-col items-center ">
             <div className="w-72 h-72">
               <img
-                src="s"
+                src={imageURL}
                 className="w-full h-full object-cover rounded-full border-gray-300 border-2"
               />
             </div>
@@ -68,10 +88,19 @@ function EditUserData() {
                 className="hover:cursor-pointer bg-blue-500 text-white p-3 rounded-lg"
               >
                 Upload Profile Picture
-                <input id="upload" type="file" hidden />
+                <input
+                  id="upload"
+                  type="file"
+                  hidden
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
               </label>
 
-              <button className="hover:cursor-pointer bg-red-600 text-white p-3 rounded-lg mt-4 ">
+              <button
+                className="hover:cursor-pointer bg-red-600 text-white p-3 rounded-lg mt-4 "
+                onClick={deleteImage}
+              >
                 Delete Picture
               </button>
             </div>
