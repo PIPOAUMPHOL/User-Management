@@ -34,13 +34,16 @@ function EditUserData() {
       birthdate !== "" &&
       imageURL.length > 0
     ) {
-      const response = await axios.put(`http://localhost:4000/users/${id}`, {
-        firstname,
-        lastname,
-        gender,
-        birthdate,
-        image: imageURL,
-      });
+      const response = await axios.put(
+        `https://user-management-server-30d4.onrender.com/users/${id}`,
+        {
+          firstname,
+          lastname,
+          gender,
+          birthdate,
+          image: imageURL,
+        }
+      );
       alert("User has been updated successfully");
       setFirstname("");
       setLastname("");
