@@ -9,7 +9,6 @@ function EditUserData() {
   const [lastname, setLastname] = useState("");
   const [gender, setGender] = useState("");
   const [birthdate, setBirthDate] = useState("");
-  const [image, setImage] = useState("");
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -24,7 +23,7 @@ function EditUserData() {
   async function createUserData() {
     try {
       const response = await axios.put(
-        `https://user-management-server-30d4.onrender.com/users/${id}`,
+        `http://localhost:4000/users/${id}`,
         userData
       );
       alert("User has been updated successfully");
@@ -43,12 +42,6 @@ function EditUserData() {
     setLastname("");
     setGender("");
     setBirthDate("");
-    setImage("");
-  }
-
-  function deleteImage(event) {
-    event.preventDefault();
-    setImage("");
   }
 
   return (
@@ -78,12 +71,7 @@ function EditUserData() {
                 <input id="upload" type="file" hidden />
               </label>
 
-              <button
-                className="hover:cursor-pointer bg-red-600 text-white p-3 rounded-lg mt-4 "
-                onClick={(event) => {
-                  deleteImage(event);
-                }}
-              >
+              <button className="hover:cursor-pointer bg-red-600 text-white p-3 rounded-lg mt-4 ">
                 Delete Picture
               </button>
             </div>
@@ -117,7 +105,7 @@ function EditUserData() {
                 }}
                 value={gender}
               >
-                <option value="" disabled selected hidden>
+                <option value="" disabled hidden>
                   -- Please select Gender --
                 </option>
                 <option value="Male">Male</option>

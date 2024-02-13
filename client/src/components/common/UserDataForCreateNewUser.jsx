@@ -7,7 +7,6 @@ function UserDataForCreateNewUser() {
   const [lastname, setLastname] = useState("");
   const [gender, setGender] = useState("");
   const [birthdate, setBirthDate] = useState("");
-  const [image, setImage] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,8 +20,13 @@ function UserDataForCreateNewUser() {
   async function createUserData() {
     try {
       const response = await axios.post(
-        "https://user-management-server-30d4.onrender.com/users",
-        userData
+        "http://localhost:4000/users",
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       alert("User has been created successfully");
       setFirstname("");
@@ -41,12 +45,6 @@ function UserDataForCreateNewUser() {
     setLastname("");
     setGender("");
     setBirthDate("");
-    setImage("");
-  }
-
-  function deleteImage(event) {
-    event.preventDefault();
-    setImage("");
   }
 
   return (
@@ -69,12 +67,7 @@ function UserDataForCreateNewUser() {
               <input id="upload" type="file" hidden />
             </label>
 
-            <button
-              className="hover:cursor-pointer bg-red-600 text-white p-3 rounded-lg mt-4 "
-              onClick={(event) => {
-                deleteImage(event);
-              }}
-            >
+            <button className="hover:cursor-pointer bg-red-600 text-white p-3 rounded-lg mt-4 ">
               Delete Picture
             </button>
           </div>
@@ -108,7 +101,7 @@ function UserDataForCreateNewUser() {
               }}
               value={gender}
             >
-              <option value="" disabled selected hidden>
+              <option value="" disabled hidden>
                 -- Please select Gender --
               </option>
               <option value="Male">Male</option>

@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from "./components/pages/Homepage";
 import CreateNewUserPage from "./components/pages/CreateNewUserPage";
 import EditUserData from "./components/pages/EditUserData";
+import ImageUpload from "./Test";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/CreateNewUser" element={<CreateNewUserPage />} />
         <Route path="/EditUserData/:id" element={<EditUserData />} />
+        <Route path="/Test" element={<ImageUpload />} />
       </Routes>
     </BrowserRouter>
   );

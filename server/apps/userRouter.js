@@ -110,7 +110,7 @@ userRouter.delete("/:id", function (req, res) {
   user = newUserData;
 
   return res.json({
-    message: `Blog post Id ${userIdFromClient} has been deleted successfully `,
+    message: `User Id ${userIdFromClient} has been deleted successfully `,
   });
 });
 
