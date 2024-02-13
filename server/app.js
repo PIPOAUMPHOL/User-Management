@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", userRouter);
 
-const port = 4000;
+const port = 4000; // พอร์ต 4000
 
 app.listen(port, () => {
   console.log(`Server is running at ${port}`);
