@@ -3,6 +3,11 @@ This project is currently under development. Other parts of the website are stil
 
 <h1>Features</h1>
 <ul>
+  <li>Show user information (It may take time to show results)</li>
+  <li>Create new user (At this time still cannot add photos)</li>
+  <li>Edit user</li>
+  <li>Delete user</li>
+  <li>Search user by name or surname</li>
   <li>Other features: 🚧 (Under Development)</li>
 </ul>
 <h2></h2>
