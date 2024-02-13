@@ -4,7 +4,7 @@ function Footer() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-11/12 flex flex-row-reverse items-center ml-10 hover:cursor-pointer">
+    <div className="w-11/12 flex flex-row-reverse items-center ml-10 hover:cursor-pointer  ">
       &gt;
       <p
         onClick={() => {

@@ -74,7 +74,7 @@ function UserDataForCreateNewUser() {
 
   return (
     <>
-      <div className="h-4/6 flex pt-5 pl-10 pr-10 overflow-hidden">
+      <div className="h-4/6 flex pt-5 pl-10 pr-10 overflow-hidden  ">
         <div className="mt-5 w-1/4 h-full flex flex-col items-center ">
           <div className="w-72 h-72">
             <img
@@ -106,8 +106,8 @@ function UserDataForCreateNewUser() {
             </button>
           </div>
         </div>
-        <div className="mt-5 w-3/4 h-full  flex  items-center justify-center  ">
-          <div className=" w-full h-56 ml-10">
+        <div className="mt-5 w-3/4 h-full  flex  items-center justify-center pb-20 ">
+          <div className=" w-full h-56 ml-10 ">
             <label htmlFor="firstname" className="text-gray-500 text-xl ">
               First Name
             </label>
@@ -177,7 +177,7 @@ function UserDataForCreateNewUser() {
           </div>
         </div>
       </div>
-      <div className="h-24 flex justify-end items-center pr-36">
+      <div className="h-24 flex justify-end items-center pr-36   ">
         <button
           className="bg-neutral-500 w-36 h-10 rounded-lg text-xl text-white"
           onClick={cancelCreateUserData}
