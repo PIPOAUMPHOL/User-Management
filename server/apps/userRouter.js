@@ -52,7 +52,7 @@ userRouter.post("/", function (req, res) {
     req.body.lastname === "" &&
     req.body.gender === "" &&
     req.body.birthdate === "" &&
-    req.body.image === ""
+    req.body.image.length == 0
   ) {
     return res.status(400).json({
       message: "Please fill your information",

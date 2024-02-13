@@ -31,17 +31,20 @@ function UserDataForCreateNewUser() {
   }
 
   async function createUserData() {
-    try {
-      const response = await axios.post(
-        "https://user-management-server-30d4.onrender.com/users",
-        {
-          firstname,
-          lastname,
-          gender,
-          birthdate,
-          image: imageURL,
-        }
-      );
+    if (
+      firstname !== "" &&
+      lastname !== "" &&
+      gender !== "" &&
+      birthdate !== "" &&
+      imageURL.length > 0
+    ) {
+      const response = await axios.post("http://localhost:4000/users", {
+        firstname,
+        lastname,
+        gender,
+        birthdate,
+        image: imageURL,
+      });
       alert("User has been created successfully");
       setFirstname("");
       setLastname("");
@@ -49,7 +52,7 @@ function UserDataForCreateNewUser() {
       setBirthDate("");
       setImageURL([]);
       navigate("/");
-    } catch (error) {
+    } else {
       alert("Please fill your information");
     }
   }
