@@ -15,13 +15,13 @@ function EditUserData() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  let userData = {
+  /* let userData = {
     firstname: firstname,
     lastname: lastname,
     gender: gender,
     birthdate: birthdate,
     image: imageURL,
-  };
+  }; */
 
   function handleFileChange(event) {
     const files = event.target.files;
@@ -36,10 +36,13 @@ function EditUserData() {
 
   async function createUserData() {
     try {
-      const response = await axios.put(
-        `https://user-management-server-30d4.onrender.com/users/${id}`,
-        userData
-      );
+      const response = await axios.put(`http://localhost:4000/users/${id}`, {
+        firstname,
+        lastname,
+        gender,
+        birthdate,
+        image: imageURL,
+      });
       alert("User has been updated successfully");
       setFirstname("");
       setLastname("");

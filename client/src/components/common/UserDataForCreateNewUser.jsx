@@ -11,13 +11,13 @@ function UserDataForCreateNewUser() {
 
   const navigate = useNavigate();
 
-  let userData = {
+  /*   let userData = {
     firstname: firstname,
     lastname: lastname,
     gender: gender,
     birthdate: birthdate,
     image: imageURL,
-  };
+  }; */
 
   function handleFileChange(event) {
     const files = event.target.files;
@@ -32,10 +32,13 @@ function UserDataForCreateNewUser() {
 
   async function createUserData() {
     try {
-      const response = await axios.post(
-        "https://user-management-server-30d4.onrender.com/users",
-        userData
-      );
+      const response = await axios.post("http://localhost:4000/users", {
+        firstname,
+        lastname,
+        gender,
+        birthdate,
+        image: imageURL,
+      });
       alert("User has been created successfully");
       setFirstname("");
       setLastname("");
