@@ -58,7 +58,7 @@ function UserData() {
               setSearch(event.target.value);
             }}
             value={search}
-            placeholder="Search"
+            placeholder="Search by First name or Last name"
           />
           <button
             onClick={(event) => {

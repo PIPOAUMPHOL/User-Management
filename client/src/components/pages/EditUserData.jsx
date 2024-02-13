@@ -15,14 +15,6 @@ function EditUserData() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  /* let userData = {
-    firstname: firstname,
-    lastname: lastname,
-    gender: gender,
-    birthdate: birthdate,
-    image: imageURL,
-  }; */
-
   function handleFileChange(event) {
     const files = event.target.files;
 
@@ -71,6 +63,14 @@ function EditUserData() {
 
   function deleteImage() {
     setImageURL([]);
+  }
+
+  function getToday() {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    return `${yyyy}-${mm}-${dd}`;
   }
 
   return (
@@ -179,6 +179,7 @@ function EditUserData() {
                     setBirthDate(event.target.value);
                   }}
                   value={birthdate}
+                  max={getToday()}
                 />
               </div>
             </div>
