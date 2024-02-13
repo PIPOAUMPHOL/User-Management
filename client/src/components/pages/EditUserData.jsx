@@ -24,7 +24,7 @@ function EditUserData() {
   async function createUserData() {
     try {
       const response = await axios.put(
-        `http://localhost:4000/users/${id}`,
+        `https://user-management-server-30d4.onrender.com/users/${id}`,
         userData
       );
       alert("User has been updated successfully");

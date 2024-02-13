@@ -21,7 +21,7 @@ function UserDataForCreateNewUser() {
   async function createUserData() {
     try {
       const response = await axios.post(
-        "http://localhost:4000/users",
+        "https://user-management-server-30d4.onrender.com/users",
         userData
       );
       alert("User has been created successfully");
