@@ -6,15 +6,22 @@ function UserData() {
   const [userData, setUserData] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [search, setSearch] = useState("");
+  const [isError, setIsError] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
 
   const navigate = useNavigate();
 
   async function getUserData() {
     if (search === "") {
+      setIsError(false);
+      setIsLoading(true);
       const response = await axios.get(
         "https://user-management-server-30d4.onrender.com/users"
       );
       setUserData(response.data.data);
+      setIsLoading(false);
+    } else {
+      setIsError(true);
     }
   }
 
@@ -26,10 +33,13 @@ function UserData() {
     event.preventDefault();
 
     if (search !== "") {
+      setIsError(false);
+      setIsLoading(true);
       const response = await axios.get(
         `https://user-management-server-30d4.onrender.com/users/${search}`
       );
       setSearchData(response.data.data);
+      setIsLoading(false);
       setSearch("");
     }
   }
@@ -95,6 +105,8 @@ function UserData() {
           <p className="text-lg font-medium relative right-2  ">Birthday</p>
           <p className="text-lg font-medium relative right-5 ">Action</p>
         </div>
+        {isError ? <h1>Request failed</h1> : null}
+        {isLoading ? <h1>Loading ....</h1> : null}
 
         {searchData[0] === undefined
           ? userData.map((item) => {
