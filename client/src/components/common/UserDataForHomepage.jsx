@@ -33,13 +33,11 @@ function UserData() {
     event.preventDefault();
 
     if (search !== "") {
-      setIsError(false);
-      setIsLoading(true);
       const response = await axios.get(
         `https://user-management-server-30d4.onrender.com/users/${search}`
       );
       setSearchData(response.data.data);
-      setIsLoading(false);
+
       setSearch("");
     }
   }
