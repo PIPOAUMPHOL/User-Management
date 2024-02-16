@@ -114,21 +114,21 @@ function UserData() {
                     <li>
                       <img
                         src={item.image}
-                        className="w-16 h-16 rounded-full object-cover relative left-14 "
+                        className="w-16 h-16 rounded-full object-cover relative left-8 "
                       />
                     </li>
                     <li>
-                      <p className="text-lg  w-36 relative left-28  ">
+                      <p className="text-lg  w-36 relative left-24  ">
                         {item.firstname}
                       </p>
                     </li>
                     <li>
-                      <p className="text-lg  w-40 relative left-24 ">
+                      <p className="text-lg  w-40 relative left-20 ">
                         {item.lastname}
                       </p>
                     </li>
                     <li>
-                      <p className="text-lg  w-16 relative left-16  ">
+                      <p className="text-lg  w-16 relative left-14  ">
                         {item.gender}
                       </p>
                     </li>
